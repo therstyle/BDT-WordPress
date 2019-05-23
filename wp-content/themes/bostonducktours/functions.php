@@ -1,0 +1,13 @@
+<?php
+
+
+include_once __DIR__ . '/bootstrap/bootstrap.php';
+
+// Setup all the functionalities that affect the entire theme,
+// regardless of the page displayed.
+\BostonDuckTours\Theme::init();
+
+// Setup plugins / functionalities related to the specific pages,
+// or functionalities the theme could work if they fail to setup.\
+\BostonDuckTours\Gutenberg::init();
+\BostonDuckTours\Plugins\ACF::init();
