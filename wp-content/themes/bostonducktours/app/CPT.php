@@ -17,8 +17,9 @@ class CPT {
 		self::register_cpt_nested_blocks();
 		self::register_cpt_discounts();
 		self::register_cpt_tours();
+		self::register_cpt_ducks();
 
-		add_theme_support( 'post-thumbnails', [ 'discount', 'tour' ] );
+		add_theme_support( 'post-thumbnails', [ 'discount', 'tour', 'duck' ] );
 	}
 
 	/**
@@ -109,24 +110,24 @@ class CPT {
 	}
 
 	/**
-	 * Tours
+	 * Tour Sites
 	 */
 	private static function register_cpt_tours(): void {
 		$labels = array(
-			'name'               => _x( 'Tours', 'post type general name', 'bostonducktours' ),
-			'singular_name'      => _x( 'Tour', 'post type singular name', 'bostonducktours' ),
-			'menu_name'          => _x( 'Tours', 'admin menu', 'bostonducktours' ),
-			'name_admin_bar'     => _x( 'Tour', 'add new on admin bar', 'bostonducktours' ),
+			'name'               => _x( 'Tour Sites', 'post type general name', 'bostonducktours' ),
+			'singular_name'      => _x( 'Tour Site', 'post type singular name', 'bostonducktours' ),
+			'menu_name'          => _x( 'Tour Sites', 'admin menu', 'bostonducktours' ),
+			'name_admin_bar'     => _x( 'Tour Site', 'add new on admin bar', 'bostonducktours' ),
 			'add_new'            => _x( 'Add New', 'tour', 'bostonducktours' ),
-			'add_new_item'       => __( 'Add New Tour', 'bostonducktours' ),
-			'new_item'           => __( 'New Tour', 'bostonducktours' ),
-			'edit_item'          => __( 'Edit Tour', 'bostonducktours' ),
-			'view_item'          => __( 'View Tour', 'bostonducktours' ),
-			'all_items'          => __( 'All Tours', 'bostonducktours' ),
-			'search_items'       => __( 'Search Tours', 'bostonducktours' ),
-			'parent_item_colon'  => __( 'Parent Tours:', 'bostonducktours' ),
-			'not_found'          => __( 'No tours found.', 'bostonducktours' ),
-			'not_found_in_trash' => __( 'No tours found in Trash.', 'bostonducktours' )
+			'add_new_item'       => __( 'Add New Tour Site', 'bostonducktours' ),
+			'new_item'           => __( 'New Tour Site', 'bostonducktours' ),
+			'edit_item'          => __( 'Edit Tour Site', 'bostonducktours' ),
+			'view_item'          => __( 'View Tour Site', 'bostonducktours' ),
+			'all_items'          => __( 'All Tour Sites', 'bostonducktours' ),
+			'search_items'       => __( 'Search Tour Sites', 'bostonducktours' ),
+			'parent_item_colon'  => __( 'Parent Tour Sites:', 'bostonducktours' ),
+			'not_found'          => __( 'No tour sites found.', 'bostonducktours' ),
+			'not_found_in_trash' => __( 'No tour sites found in Trash.', 'bostonducktours' )
 		);
 
 		$args = array(
@@ -149,22 +150,22 @@ class CPT {
 
 		// Category
 		$labels = array(
-			'name'                       => _x( 'Categories', 'taxonomy general name', 'textdomain' ),
-			'singular_name'              => _x( 'Category', 'taxonomy singular name', 'textdomain' ),
-			'search_items'               => __( 'Search Categories', 'textdomain' ),
-			'popular_items'              => __( 'Popular Categories', 'textdomain' ),
-			'all_items'                  => __( 'All Categories', 'textdomain' ),
+			'name'                       => _x( 'Categories', 'taxonomy general name', 'bostonducktours' ),
+			'singular_name'              => _x( 'Category', 'taxonomy singular name', 'bostonducktours' ),
+			'search_items'               => __( 'Search Categories', 'bostonducktours' ),
+			'popular_items'              => __( 'Popular Categories', 'bostonducktours' ),
+			'all_items'                  => __( 'All Categories', 'bostonducktours' ),
 			'parent_item'                => null,
 			'parent_item_colon'          => null,
-			'edit_item'                  => __( 'Edit Category', 'textdomain' ),
-			'update_item'                => __( 'Update Category', 'textdomain' ),
-			'add_new_item'               => __( 'Add New Category', 'textdomain' ),
-			'new_item_name'              => __( 'New Category Name', 'textdomain' ),
-			'separate_items_with_commas' => __( 'Separate categories with commas', 'textdomain' ),
-			'add_or_remove_items'        => __( 'Add or remove categories', 'textdomain' ),
-			'choose_from_most_used'      => __( 'Choose from the most used categories', 'textdomain' ),
-			'not_found'                  => __( 'No categories found.', 'textdomain' ),
-			'menu_name'                  => __( 'Categories', 'textdomain' ),
+			'edit_item'                  => __( 'Edit Category', 'bostonducktours' ),
+			'update_item'                => __( 'Update Category', 'bostonducktours' ),
+			'add_new_item'               => __( 'Add New Category', 'bostonducktours' ),
+			'new_item_name'              => __( 'New Category Name', 'bostonducktours' ),
+			'separate_items_with_commas' => __( 'Separate categories with commas', 'bostonducktours' ),
+			'add_or_remove_items'        => __( 'Add or remove categories', 'bostonducktours' ),
+			'choose_from_most_used'      => __( 'Choose from the most used categories', 'bostonducktours' ),
+			'not_found'                  => __( 'No categories found.', 'bostonducktours' ),
+			'menu_name'                  => __( 'Categories', 'bostonducktours' ),
 		);
 
 		$args = array(
@@ -178,5 +179,77 @@ class CPT {
 		);
 
 		register_taxonomy( 'tour-category', 'tour', $args );
+	}
+
+	/**
+	 * DUCKs & ConDUCKtors
+	 */
+	private static function register_cpt_ducks(): void {
+		$labels = array(
+			'name'               => _x( 'DUCKs & ConDUCKtors', 'post type general name', 'bostonducktours' ),
+			'singular_name'      => _x( 'DUCK & ConDUCKtor', 'post type singular name', 'bostonducktours' ),
+			'menu_name'          => _x( 'DUCKs & ConDUCKtors', 'admin menu', 'bostonducktours' ),
+			'name_admin_bar'     => _x( 'DUCK & ConDUCKtor', 'add new on admin bar', 'bostonducktours' ),
+			'add_new'            => _x( 'Add New', 'duck', 'bostonducktours' ),
+			'add_new_item'       => __( 'Add New DUCK & ConDUCKtor', 'bostonducktours' ),
+			'new_item'           => __( 'New DUCK & ConDUCKtor', 'bostonducktours' ),
+			'edit_item'          => __( 'Edit DUCK & ConDUCKtor', 'bostonducktours' ),
+			'view_item'          => __( 'View DUCK & ConDUCKtor', 'bostonducktours' ),
+			'all_items'          => __( 'All DUCKs & ConDUCKtors', 'bostonducktours' ),
+			'search_items'       => __( 'Search DUCKs & ConDUCKtors', 'bostonducktours' ),
+			'parent_item_colon'  => __( 'Parent DUCKs & ConDUCKtors:', 'bostonducktours' ),
+			'not_found'          => __( 'No DUCKs | ConDUCKtors found.', 'bostonducktours' ),
+			'not_found_in_trash' => __( 'No DUCKs | ConDUCKtors found in Trash.', 'bostonducktours' )
+		);
+
+		$args = array(
+			'labels'             => $labels,
+			'description'        => __( 'Description.', 'bostonducktours' ),
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => 'duck' ),
+			'capability_type'    => 'post',
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'menu_position'      => null,
+			'supports'           => array( 'title', 'editor', 'thumbnail' )
+		);
+
+		register_post_type( 'duck', $args );
+
+		// Category
+		$labels = array(
+			'name'                       => _x( 'Categories', 'taxonomy general name', 'bostonducktours' ),
+			'singular_name'              => _x( 'Category', 'taxonomy singular name', 'bostonducktours' ),
+			'search_items'               => __( 'Search Categories', 'bostonducktours' ),
+			'popular_items'              => __( 'Popular Categories', 'bostonducktours' ),
+			'all_items'                  => __( 'All Categories', 'bostonducktours' ),
+			'parent_item'                => null,
+			'parent_item_colon'          => null,
+			'edit_item'                  => __( 'Edit Category', 'bostonducktours' ),
+			'update_item'                => __( 'Update Category', 'bostonducktours' ),
+			'add_new_item'               => __( 'Add New Category', 'bostonducktours' ),
+			'new_item_name'              => __( 'New Category Name', 'bostonducktours' ),
+			'separate_items_with_commas' => __( 'Separate categories with commas', 'bostonducktours' ),
+			'add_or_remove_items'        => __( 'Add or remove categories', 'bostonducktours' ),
+			'choose_from_most_used'      => __( 'Choose from the most used categories', 'bostonducktours' ),
+			'not_found'                  => __( 'No categories found.', 'bostonducktours' ),
+			'menu_name'                  => __( 'Categories', 'bostonducktours' ),
+		);
+
+		$args = array(
+			'hierarchical'          => false,
+			'labels'                => $labels,
+			'show_ui'               => true,
+			'show_admin_column'     => true,
+			'update_count_callback' => '_update_post_term_count',
+			'query_var'             => true,
+			'rewrite'               => array( 'slug' => 'duck-category' ),
+		);
+
+		register_taxonomy( 'duck-category', 'duck', $args );
 	}
 }

@@ -51,7 +51,7 @@ register_rest_route(
 	'options/(?<options>.+)',
 	[
 		'methods'  => 'GET',
-		'callback' => [  \BostonDuckTours\Settings::class, 'api_get_options' ]
+		'callback' => [ \BostonDuckTours\Settings::class, 'api_get_options' ]
 	]
 );
 
@@ -122,6 +122,15 @@ register_rest_route(
 	'tours',
 	[
 		'methods'  => 'GET',
-		'callback' => [ \BostonDuckTours\Tours::class, 'api_get_tours' ]
+		'callback' => [ \BostonDuckTours\Tours::class, 'api_get' ]
+	]
+);
+
+register_rest_route(
+	$api_prefix,
+	'ducks',
+	[
+		'methods'  => 'GET',
+		'callback' => [ \BostonDuckTours\Ducks::class, 'api_get' ]
 	]
 );

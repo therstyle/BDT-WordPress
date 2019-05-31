@@ -41,9 +41,10 @@ class Header {
 			'actionbuttons_locations_link',
 			'actionbuttons_language_switcher_label',
 			'actionbuttons_ticekts',
+			'page_on_front',
 		];
 
-		$options = ACF::get_options_data( $preloadedOptions );
+		$options = Settings::get_options( implode( ',', $preloadedOptions ) );
 
 		// "ACF::get_options_data" retrieves data for all languages.
 		// Let's return header data for current language only.

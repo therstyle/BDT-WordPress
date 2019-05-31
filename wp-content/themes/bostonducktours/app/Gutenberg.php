@@ -14,7 +14,8 @@ class Gutenberg {
 	static $allowed_post_types = [
 		'post',
 		'page',
-		'discount'
+		'discount',
+		'nested_block'
 	];
 
 	/**
@@ -214,7 +215,7 @@ class Gutenberg {
 	 */
 	public static function render_block( array $block ): void {
 		$block_id = $block['id'];
-		$props = self::parse_block_acf_fields( $block['id'], $block['data'] );
+		$props    = self::parse_block_acf_fields( $block['id'], $block['data'] );
 
 		?>
 
