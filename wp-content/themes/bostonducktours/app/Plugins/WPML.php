@@ -72,7 +72,8 @@ class WPML {
 			$urls[ $data['language_code'] ] = apply_filters(
 				'wpml_permalink',
 				get_permalink( $translated_post_id ),
-				$data['language_code']
+				$data['language_code'],
+				defined('REST_REQUEST') && REST_REQUEST
 			);
 		}
 
