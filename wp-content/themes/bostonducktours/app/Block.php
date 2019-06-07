@@ -75,6 +75,7 @@ class Block {
 			empty( $block['blockName'] )
 			|| $block['blockName'] === 'core/paragraph'
 			|| $block['blockName'] === 'core/heading'
+			|| $block['blockName'] === 'core/spacer'
 			|| $block['blockName'] === 'core/list'
 		);
 
