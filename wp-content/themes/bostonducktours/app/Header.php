@@ -22,6 +22,7 @@ class Header {
 	 */
 	public static function add_menu(): void {
 		register_nav_menu( 'header', __( 'Header', 'bostonducktours' ) );
+		register_nav_menu( 'header-mobile', __( 'Header (mobile, below language switcher)', 'bostonducktours' ) );
 	}
 
 	/**
@@ -32,6 +33,7 @@ class Header {
 	public static function get_data(): array {
 		// Add Menu to Header
 		$menu = new Menu( 'header' );
+		$menuMobile = new Menu( 'header-mobile' );
 
 		// Add Theme options to Header
 		$preloadedOptions = [
@@ -55,6 +57,7 @@ class Header {
 
 		return array_merge(
 			[ 'menu' => $menu->get_nested_items() ],
+			[ 'menu_mobile' => $menuMobile->get_nested_items() ],
 			$options
 		);
 	}
