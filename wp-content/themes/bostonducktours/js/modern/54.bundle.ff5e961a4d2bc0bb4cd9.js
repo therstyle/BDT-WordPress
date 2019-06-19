@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[54],{796:function(e,n,s){"use strict";s.r(n);var o=s(1),t=s.n(o),c=s(38),l=s(209),a={nested_blocks:c.n},p=function(e){var n=e.nested_blocks;return t.a.createElement(l.a,{blocks:n.blocks})};p.propTypes=a,p.defaultProps={nested_blocks:null},n.default=p}}]);
