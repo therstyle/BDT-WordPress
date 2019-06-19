@@ -11,3 +11,10 @@ include_once __DIR__ . '/bootstrap/bootstrap.php';
 // or functionalities the theme could work if they fail to setup.\
 \BostonDuckTours\Gutenberg::init();
 \BostonDuckTours\Plugins\ACF::init();
+
+function my_acf_init() {
+	
+	acf_update_setting('google_api_key', 'AIzaSyA20hHZb_TrVC_72kDZjM5oG0yFd4FU-uc');
+}
+
+add_action('acf/init', 'my_acf_init');
