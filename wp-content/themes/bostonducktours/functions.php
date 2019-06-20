@@ -13,8 +13,7 @@ include_once __DIR__ . '/bootstrap/bootstrap.php';
 \BostonDuckTours\Plugins\ACF::init();
 
 function my_acf_init() {
-	
-	acf_update_setting('google_api_key', 'AIzaSyA20hHZb_TrVC_72kDZjM5oG0yFd4FU-uc');
+	acf_update_setting('google_api_key', <?php the_field( 'api_key_google_maps', 'option' ); ?>);
 }
 
 add_action('acf/init', 'my_acf_init');
