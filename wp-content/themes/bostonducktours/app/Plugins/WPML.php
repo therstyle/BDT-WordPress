@@ -41,7 +41,7 @@ class WPML {
 				'nativeName' => $language['native_name'],
 				'prefix' => $language['language_code']
 			];
-		}, $languages );
+		}, $languages ) ?: [];
 	}
 
 	/**
@@ -86,7 +86,7 @@ class WPML {
 	 * @return string
 	 */
 	public static function get_current_language(): string {
-		return ICL_LANGUAGE_CODE;
+		return defined( 'ICL_LANGUAGE_CODE' ) ? ICL_LANGUAGE_CODE : 'en';
 	}
 
 	/**
@@ -111,6 +111,6 @@ class WPML {
 	 * @return array
 	 */
 	public static function get_languages(): array {
-		return apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
+		return apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' ) ?: [];
 	}
 }
