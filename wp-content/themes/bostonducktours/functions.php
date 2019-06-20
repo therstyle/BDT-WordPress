@@ -15,5 +15,4 @@ include_once __DIR__ . '/bootstrap/bootstrap.php';
 function my_acf_init() {
 	acf_update_setting('google_api_key', the_field( 'api_key_google_maps', 'option' ));
 }
-
 add_action('acf/init', 'my_acf_init');
