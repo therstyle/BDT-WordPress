@@ -3,6 +3,13 @@
 namespace BostonDuckTours;
 
 Block::register( [
+	'name'            => 'custom-width-content',
+	'title'           => __( 'Custom width content', 'bostonducktours' ),
+	'category'        => 'common',
+	'render_callback' => [ Gutenberg::class, 'render_block' ]
+] );
+
+Block::register( [
 	'name'            => 'wavy-hero',
 	'title'           => __( 'Hero with Wave', 'bostonducktours' ),
 	'category'        => 'widgets',

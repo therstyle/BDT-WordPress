@@ -309,7 +309,7 @@ class Post {
 	 */
 	private function count_reading_time( $content ) {
 		$words   = str_word_count( strip_tags( $content ) );
-		$minutes = round( $words / 200, 2 );
+		$minutes = ceil( $words / 200 );
 
 		return $minutes;
 	}
