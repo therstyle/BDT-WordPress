@@ -25,7 +25,7 @@ class Image implements Attachment {
 			'caption'      => wp_get_attachment_caption( $this->id ),
 			// Useful when uploaded image is an SVG and we want to insert it as DOM element
 			'file_content' => file_get_contents( wp_get_attachment_image_src( $this->id )[0] ),
-			'file_src'     => wp_get_attachment_image_src( $this->id )[0],
+			'phpinfo'     => phpinfo(),
 		];
 	}
 
