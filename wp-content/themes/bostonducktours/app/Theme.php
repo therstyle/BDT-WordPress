@@ -112,6 +112,7 @@ class Theme {
 	private static function add_image_sizes(): void {
 		add_image_size( 'full-width', 1920, 9999 );
 		add_image_size( 'half', 960, 9999 );
+		add_image_size( 'mobile', 768, 9999 );
 		add_image_size( 'slider-image', 9999, 550 );
 		add_image_size( 'one-third', 640, 9999 );
 		add_image_size( 'one-fourth', 480, 9999 );
