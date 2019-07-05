@@ -25,7 +25,6 @@ class Image implements Attachment {
 			'caption'      => wp_get_attachment_caption( $this->id ),
 			// Useful when uploaded image is an SVG and we want to insert it as DOM element
 			'file_content' => file_get_contents( wp_get_attachment_image_src( $this->id, 'full' )[0]),
-			'file_curl' => $this->get_content(wp_get_attachment_image_src( $this->id, 'full' )[0]),
 		];
 	}
 
@@ -89,14 +88,5 @@ class Image implements Attachment {
 		MemoryCache::add( 'image_sizes', $sizes );
 
 		return $sizes;
-	}
-
-	private function get_content($URL) {
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_URL, $URL);
-		$data = curl_exec($ch);
-		curl_close($ch);
-		return $data;
 	}
 }
