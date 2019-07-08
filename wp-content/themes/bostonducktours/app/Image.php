@@ -24,8 +24,7 @@ class Image implements Attachment {
 			'sources'      => $this->get_sizes(),
 			'caption'      => wp_get_attachment_caption( $this->id ),
 			// Useful when uploaded image is an SVG and we want to insert it as DOM element
-			'file_content1' => file_get_contents( get_attached_file( $this->id ) ),
-			'get_attached_file' => get_attached_file( $this->id ),
+			'file_content' => file_get_contents( get_attached_file( $this->id ) ),
 		];
 	}
 
