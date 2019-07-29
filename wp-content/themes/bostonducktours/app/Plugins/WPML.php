@@ -34,14 +34,15 @@ class WPML {
 		$languages = apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
 
 		// Get just necessary values from retrieved languages array
-		return array_map( function ( $language ) {
+
+		return is_array($languages) ? array_map( function ( $language ) {
 			return [
 				'locale' => $language['default_locale'],
 				'translatedName' => $language['translated_name'],
 				'nativeName' => $language['native_name'],
 				'prefix' => $language['language_code']
 			];
-		}, $languages ) ?: [];
+		}, $languages ) : [];
 	}
 
 	/**
