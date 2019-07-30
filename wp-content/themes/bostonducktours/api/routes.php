@@ -29,7 +29,7 @@ register_rest_route(
 // Retrieve single post by slug.
 register_rest_route(
 	$api_prefix,
-	'post/(?<slug>.+)',
+	'post/(?<path>.+)',
 	[
 		'methods'  => 'GET',
 		'callback' => [ \BostonDuckTours\Post::class, 'api_get_post' ]
@@ -110,7 +110,7 @@ register_rest_route(
 // Retrieve related posts for RelatedPosts component
 register_rest_route(
 	$api_prefix,
-	'related/(?<slug>.+)',
+	'related/(?<path>.+)',
 	[
 		'methods'  => 'GET',
 		'callback' => [ \BostonDuckTours\RelatedPosts::class, 'api_get_related_posts' ]

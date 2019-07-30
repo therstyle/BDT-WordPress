@@ -16,26 +16,21 @@ class RelatedPosts {
 	 */
 	public static function api_get_related_posts( \WP_REST_Request $request ): \WP_REST_Response {
 
-		$slug = $request['slug'];
+		$path = $request['path'];
 
 		// Slug was not provided. That should be impossible.
-		if ( ! $slug ) {
+		if ( ! $path ) {
 			return ApiResponse::error( __( 'Invalid slug.', 'bostonducktours' ) );
 		}
 
-		// There is no function retrieving just one post by slug,
-		// so we have to retrieve an array.
-		$posts = get_posts( [
-			'name'      => $slug,
-			'post_type' => 'any'
-		] );
+		$post_obj = Post::get_post_object($path);
 
 		// Post was not found.
-		if ( ! $posts[0] ) {
+		if ( ! $post_obj ) {
 			return ApiResponse::error( __( 'Post not found.', 'bostonducktours' ) );
 		}
 
-		return ApiResponse::ok( self::get_formatted_related_posts( $posts[0]->ID ) );
+		return ApiResponse::ok( self::get_formatted_related_posts( $post_obj->ID ) );
 	}
 
 	/**

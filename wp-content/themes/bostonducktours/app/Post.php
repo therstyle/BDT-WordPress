@@ -25,29 +25,25 @@ class Post {
 	 * @return \WP_REST_Response
 	 */
 	public static function api_get_post( \WP_REST_Request $request ): \WP_REST_Response {
-		$slug = $request['slug'];
+		$path = $request['path'];
 
-		// Slug was not provided. That should be impossible.
-		if ( ! $slug ) {
-			return ApiResponse::error( __( 'Invalid slug.', 'bostonducktours' ) );
+		// Path was not provided. That should be impossible.
+		if ( ! $path ) {
+			return ApiResponse::error( __( 'Invalid path.', 'bostonducktours' ) );
 		}
 
-		// There is no function retrieving just one post by slug,
-		// so we have to retrieve an array.
-		$posts = get_posts( [
-			'name'      => $slug,
-			'post_type' => 'any'
-		] );
+		$post_obj = self::get_post_object( $path );
 
 		// Post was not found.
-		if ( ! $posts ) {
-			return ApiResponse::error( __( 'Post not found.', 'bostonducktours' ) );
+		if ( ! $post_obj ) {
+			return ApiResponse::error( __( 'Post not found.' . $full_path, 'bostonducktours' ) );
 		}
 
 		// Post was found.
 		// Pass it through the parser to retrieve the data in the same
 		// format as preloaded data.
-		$post = new self( $posts[0] );
+		$post = new self( $post_obj );
+
 
 		return ApiResponse::ok( $post->get_formatted_data() );
 	}
@@ -93,6 +89,7 @@ class Post {
 		$fields_to_generate = [
 			'id',
 			'slug',
+			'path',
 			'type',
 			'excerpt',
 			'content',
@@ -120,6 +117,35 @@ class Post {
 	}
 
 	/**
+	 * Retrieve single post object
+	 *
+	 * @param string $path
+	 *
+	 * @return object
+	 */
+	public static function get_post_object( string $path ): object {
+
+		// Generate full link of page based on path provided
+		$full_path = get_bloginfo( 'url' ) . '/' . $path;
+
+		// Retrieve post ID based on provided path
+		$post_id = url_to_postid( $full_path );
+
+		// get post object from retrieved ID
+		$post_obj = get_post( $post_id );
+
+		// Get $post_obj variable for blog page for which 'url_to_postid()' function doesn't work
+		if ( ! $post_obj ) {
+			$page_for_posts_url = get_permalink( get_option( 'page_for_posts' ) );
+			if ( rtrim( $full_path, '/' ) == rtrim( $page_for_posts_url, '/' ) ) {
+				$post_obj = get_post( get_option( 'page_for_posts' ) );
+			}
+		}
+
+		return $post_obj;
+	}
+
+	/**
 	 * Retrieve unified formatted data for one Post field.
 	 *
 	 * Because we can generate field values field by field we can respond
@@ -139,6 +165,9 @@ class Post {
 
 			case 'slug':
 				return $this->get_post_slug();
+
+			case 'path':
+				return $this->get_post_path();
 
 			case 'type':
 				return $this->post->post_type;
@@ -187,6 +216,19 @@ class Post {
 		}
 
 		return $this->post->post_name;
+	}
+
+
+	/**
+	 * Retrieve relative link for any page
+	 *
+	 * @return string
+	 */
+	private function get_post_path(): string {
+		$permalink     = get_permalink( $this->post->ID );
+		$relative_link = wp_make_link_relative( $permalink );
+
+		return $relative_link;
 	}
 
 	/**
