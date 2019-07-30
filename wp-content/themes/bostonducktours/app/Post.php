@@ -44,7 +44,6 @@ class Post {
 		// format as preloaded data.
 		$post = new self( $post_obj );
 
-
 		return ApiResponse::ok( $post->get_formatted_data() );
 	}
 
@@ -121,9 +120,9 @@ class Post {
 	 *
 	 * @param string $path
 	 *
-	 * @return object
+	 * @return \WP_Post
 	 */
-	public static function get_post_object( string $path ): object {
+	public static function get_post_object( string $path ): \WP_Post {
 
 		// Generate full link of page based on path provided
 		$full_path = get_bloginfo( 'url' ) . '/' . $path;
