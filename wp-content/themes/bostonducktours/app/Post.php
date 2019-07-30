@@ -36,7 +36,7 @@ class Post {
 
 		// Post was not found.
 		if ( ! $post_obj ) {
-			return ApiResponse::error( __( 'Post not found.' . $full_path, 'bostonducktours' ) );
+			return ApiResponse::error( __( 'Post not found.', 'bostonducktours' ) );
 		}
 
 		// Post was found.
