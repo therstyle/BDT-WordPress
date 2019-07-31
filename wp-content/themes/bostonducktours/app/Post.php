@@ -120,9 +120,9 @@ class Post {
 	 *
 	 * @param string $path
 	 *
-	 * @return \WP_Post
+	 * @return \WP_Post|null
 	 */
-	public static function get_post_object( string $path ): \WP_Post {
+	public static function get_post_object( string $path ) {
 
 		// Generate full link of page based on path provided
 		$full_path = get_bloginfo( 'url' ) . '/' . $path;
