@@ -22,6 +22,8 @@ class Header {
 	 */
 	public static function add_menu(): void {
 		register_nav_menu( 'header', __( 'Header', 'bostonducktours' ) );
+		register_nav_menu( 'header-mobile', __( 'Header (mobile, below language switcher)', 'bostonducktours' ) );
+		register_nav_menu( 'header-international', __( 'Header (International)', 'bostonducktours' ) );
 	}
 
 	/**
@@ -32,6 +34,8 @@ class Header {
 	public static function get_data(): array {
 		// Add Menu to Header
 		$menu = new Menu( 'header' );
+		$menuMobile = new Menu( 'header-mobile' );
+		$menuInternational = new Menu( 'header-international' );
 
 		// Add Theme options to Header
 		$preloadedOptions = [
@@ -41,9 +45,10 @@ class Header {
 			'actionbuttons_locations_link',
 			'actionbuttons_language_switcher_label',
 			'actionbuttons_ticekts',
+			'page_on_front',
 		];
 
-		$options = ACF::get_options_data( $preloadedOptions );
+		$options = Settings::get_options( implode( ',', $preloadedOptions ) );
 
 		// "ACF::get_options_data" retrieves data for all languages.
 		// Let's return header data for current language only.
@@ -54,6 +59,8 @@ class Header {
 
 		return array_merge(
 			[ 'menu' => $menu->get_nested_items() ],
+			[ 'menu_mobile' => $menuMobile->get_nested_items() ],
+			[ 'menu_international' => $menuInternational->get_nested_items() ],
 			$options
 		);
 	}

@@ -3,6 +3,13 @@
 namespace BostonDuckTours;
 
 Block::register( [
+	'name'            => 'custom-width-content',
+	'title'           => __( 'Custom width content', 'bostonducktours' ),
+	'category'        => 'common',
+	'render_callback' => [ Gutenberg::class, 'render_block' ]
+] );
+
+Block::register( [
 	'name'            => 'wavy-hero',
 	'title'           => __( 'Hero with Wave', 'bostonducktours' ),
 	'category'        => 'widgets',
@@ -236,15 +243,30 @@ Block::register( [
 
 Block::register( [
 	'name'             => 'tours',
-	'title'            => __( 'Tours', 'bostonducktours' ),
+	'title'            => __( 'Tour', 'bostonducktours' ),
 	'category'         => 'common',
 	'render_callback'  => [ Gutenberg::class, 'render_block' ],
 	'preload_callback' => function () {
-		$tours = Tours::get_tours();
+		$tours = Tours::get_posts_data();
 
 		Preloader::add( [
 			'tours' => $tours['tours'],
 			'tourCategories' => $tours['categories'],
+		] );
+	}
+] );
+
+Block::register( [
+	'name'             => 'ducks',
+	'title'            => __( 'DUCKS & ConDUCKtors', 'bostonducktours' ),
+	'category'         => 'common',
+	'render_callback'  => [ Gutenberg::class, 'render_block' ],
+	'preload_callback' => function () {
+		$ducks = Ducks::get_posts_data();
+
+		Preloader::add( [
+			'ducks' => $ducks['ducks'],
+			'duckCategories' => $ducks['categories'],
 		] );
 	}
 ] );

@@ -15,6 +15,7 @@ class Theme {
 	 * and after running it everything that team requires will be ready.
 	 */
 	public static function init(): void {
+		self::register_new_editor_styles();
 		self::add_title_support();
 		self::add_excerpt_support();
 		self::register_rest_routes();
@@ -32,6 +33,36 @@ class Theme {
 	 */
 	private static function add_title_support(): void {
 		add_theme_support( 'title-tag' );
+	}
+
+	/**
+	 * @see https://codex.wordpress.org/TinyMCE_Custom_Styles
+	 */
+	private static function register_new_editor_styles(): void {
+		add_filter( 'mce_buttons_3', function ( $buttons ) {
+			array_unshift( $buttons, 'styleselect' );
+
+			return $buttons;
+		} );
+
+
+		add_filter( 'tiny_mce_before_init', function ( $init_array ) {
+			$style_formats = array(
+				array(
+					'title'    => 'Lead Paragraph',
+					'block'    => 'p',
+					'selector' => 'p',
+					'classes'  => 'lead-paragraph',
+					'wrapper'  => false,
+
+				),
+			);
+
+			$init_array['style_formats'] = wp_json_encode( $style_formats );
+
+			return $init_array;
+
+		} );
 	}
 
 	/**
@@ -81,6 +112,8 @@ class Theme {
 	private static function add_image_sizes(): void {
 		add_image_size( 'full-width', 1920, 9999 );
 		add_image_size( 'half', 960, 9999 );
+		add_image_size( 'mobile', 768, 9999 );
+		add_image_size( 'slider-image', 9999, 550 );
 		add_image_size( 'one-third', 640, 9999 );
 		add_image_size( 'one-fourth', 480, 9999 );
 		add_image_size( 'post-tile', 560, 315, true );

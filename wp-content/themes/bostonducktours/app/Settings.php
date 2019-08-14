@@ -48,10 +48,15 @@ class Settings {
 		$wp_options = self::get_wp_options( $options );
 
 		// Get ACF settings
-		$options     = array_diff( $options, $wp_options );
+		foreach ($options as $key => $option) {
+			if ($wp_options[$option]) {
+				unset($options[$key]);
+			}
+		}
+
 		$acf_options = $options ? ACF::get_options_data( $options ) : [];
 
-		$options = array_merge( $wp_options, $acf_options );
+		$options = array_merge( $acf_options, $wp_options );
 
 		return $options;
 	}
@@ -75,12 +80,15 @@ class Settings {
 		foreach ( $options as $option ) {
 			$languages = WPML::get_languages();
 
+			$option_value = get_option( $option );
+			if (!$option_value) {
+				continue;
+			}
+
 			$values = [];
 
 			foreach ( $languages as $code => $language_data ) {
 				$sitepress->switch_lang( $code );
-				$option_value = get_option( $option );
-
 				// If option is ID of page we have to retrieve URL
 				// for that page with translation handling
 				if ( in_array( $option, $links_array ) ) {
@@ -88,11 +96,11 @@ class Settings {
 				}
 
 				$values[ $code ] = $option_value;
+				$sitepress->switch_lang( ICL_LANGUAGE_CODE );
 			}
 
 			$responseArray[ $option ] = $values;
 		}
-		$sitepress->switch_lang( ICL_LANGUAGE_CODE );
 
 		return $responseArray;
 	}

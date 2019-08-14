@@ -39,6 +39,12 @@ class ACF {
 			$languages = WPML::get_languages();
 			$values    = [];
 
+			// If WPML is disabled we'll have empty array of languages, we'll not make
+			// any iterations in the loop below, and therefore not retrieve any options.
+			if ( ! $languages ) {
+				$languages['en'] = [];
+			}
+
 			foreach ( $languages as $code => $language_data ) {
 				$suffix = "_${code}";
 				if ( $code === 'en' ) {

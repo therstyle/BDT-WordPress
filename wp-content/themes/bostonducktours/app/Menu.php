@@ -79,6 +79,7 @@ class Menu {
 				'ID'      => $menu_element->ID,
 				'title'   => $menu_element->title,
 				'url'     => $menu_element->url,
+				'target'  => $menu_element->target,
 				'classes' => $menu_element->classes
 			];
 

@@ -34,14 +34,15 @@ class WPML {
 		$languages = apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
 
 		// Get just necessary values from retrieved languages array
-		return array_map( function ( $language ) {
+
+		return is_array($languages) ? array_map( function ( $language ) {
 			return [
 				'locale' => $language['default_locale'],
 				'translatedName' => $language['translated_name'],
 				'nativeName' => $language['native_name'],
 				'prefix' => $language['language_code']
 			];
-		}, $languages );
+		}, $languages ) : [];
 	}
 
 	/**
@@ -72,7 +73,8 @@ class WPML {
 			$urls[ $data['language_code'] ] = apply_filters(
 				'wpml_permalink',
 				get_permalink( $translated_post_id ),
-				$data['language_code']
+				$data['language_code'],
+				defined('REST_REQUEST') && REST_REQUEST
 			);
 		}
 
@@ -85,7 +87,7 @@ class WPML {
 	 * @return string
 	 */
 	public static function get_current_language(): string {
-		return ICL_LANGUAGE_CODE;
+		return defined( 'ICL_LANGUAGE_CODE' ) ? ICL_LANGUAGE_CODE : 'en';
 	}
 
 	/**
@@ -110,6 +112,6 @@ class WPML {
 	 * @return array
 	 */
 	public static function get_languages(): array {
-		return apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
+		return apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' ) ?: [];
 	}
 }

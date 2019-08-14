@@ -20,9 +20,11 @@ class Image implements Attachment {
 	 */
 	public function get_formatted_data(): array {
 		return [
-			'ID'      => $this->id,
-			'sources' => $this->get_sizes(),
-			'caption' => wp_get_attachment_caption( $this->id )
+			'ID'           => $this->id,
+			'sources'      => $this->get_sizes(),
+			'caption'      => wp_get_attachment_caption( $this->id ),
+			// Useful when uploaded image is an SVG and we want to insert it as DOM element
+			'file_content' => file_get_contents( get_attached_file( $this->id ) ),
 		];
 	}
 
