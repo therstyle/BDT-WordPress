@@ -23,9 +23,31 @@ class Image implements Attachment {
 			'ID'           => $this->id,
 			'sources'      => $this->get_sizes(),
 			'caption'      => wp_get_attachment_caption( $this->id ),
-			// Useful when uploaded image is an SVG and we want to insert it as DOM element
-			'file_content' => file_get_contents( get_attached_file( $this->id ) ),
+			'file_content' => $this->get_file_content(),
 		];
+	}
+
+	/**
+	 * Function to retrieve plain text of file.
+	 * Useful when uploaded image is an SVG and we want to insert it as DOM element
+	 *
+	 *
+	 * @return string
+	 */
+	public function get_file_content(): string {
+		$file_content = '';
+		$src          = wp_get_attachment_image_src( $this->id );
+		if ( ! $src ) {
+			return $file_content;
+		}
+
+		$ext = pathinfo( $src[0], PATHINFO_EXTENSION );
+
+		if ( $ext != 'svg' ) {
+			$file_content = file_get_contents( get_attached_file( $this->id ) );
+		}
+
+		return $file_content;
 	}
 
 	/**
