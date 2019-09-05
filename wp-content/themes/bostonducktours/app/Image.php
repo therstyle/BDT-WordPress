@@ -43,7 +43,7 @@ class Image implements Attachment {
 
 		$ext = pathinfo( $src[0], PATHINFO_EXTENSION );
 
-		if ( $ext != 'svg' ) {
+		if ( $ext == 'svg' ) {
 			$file_content = file_get_contents( get_attached_file( $this->id ) );
 		}
 
