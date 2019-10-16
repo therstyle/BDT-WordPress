@@ -43,10 +43,7 @@ class Awards {
 				$icon_ID = $award['logo']['ID'];
 				$icon    = new Image( $icon_ID );
 
-				$awards['awards_slider_content'][ $key ]['logo'] = [
-					'ID'      => $icon_ID,
-					'sources' => $icon->get_sizes(),
-				];
+				$awards['awards_slider_content'][ $key ]['logo'] = $icon->get_formatted_data();
 			}
 		}
 
