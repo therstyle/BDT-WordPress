@@ -331,11 +331,7 @@ class Post {
 		}
 
 		$featured_image = new Image( $image_id );
-
-		return [
-			'ID'      => $image_id,
-			'sources' => $featured_image->get_sizes()
-		];
+		return $featured_image->get_formatted_data();
 	}
 
 	/**
