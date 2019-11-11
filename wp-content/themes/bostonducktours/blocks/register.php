@@ -199,6 +199,13 @@ Block::register( [
 ] );
 
 Block::register( [
+	'name'            => 'video-gallery',
+	'title'           => __( 'Video Gallery', 'bostonducktours' ),
+	'category'        => 'common',
+	'render_callback' => [ Gutenberg::class, 'render_block' ]
+] );
+
+Block::register( [
 	'name'             => 'posts-list',
 	'title'            => __( 'Posts List with Pagination', 'bostonducktours' ),
 	'category'         => 'common',
